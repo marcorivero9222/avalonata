@@ -1,0 +1,78 @@
+/* Seats share one foreground layer: the tabletop cannot hide a face or label. */
+.table-stage,
+.table-stage.exhibition {
+  width:100%; max-width:1120px; height:clamp(540px,62vw,760px);
+  margin:32px auto 48px; isolation:isolate;
+}
+.table-stage .oval-table {
+  left:9%; top:28%; width:82%; height:45%; z-index:0;
+  background:radial-gradient(ellipse at 50% 35%,#292b27,var(--ink) 75%);
+  border:1px solid var(--ink);
+  box-shadow:0 8px 0 #787367,0 10px 0 var(--ink),0 22px 28px -18px #17191555,
+    inset 0 0 0 5px var(--paper),inset 0 0 0 7px var(--ink),inset 0 0 0 9px #a19f90;
+}
+.table-stage .oval-table:after {
+  content:''; position:absolute; inset:18px; border:1px solid #c7c1ae33;
+  border-radius:50%; pointer-events:none;
+}
+.table-stage .seat,
+.table-stage:not(.exhibition) .seat {
+  --seat-width:16%; width:var(--seat-width); max-width:180px;
+  left:var(--x); top:var(--y); z-index:3;
+  transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center;
+  padding:0; border:0; overflow:visible;
+}
+.table-stage .seat:not(:disabled):hover {transform:translate(-50%,-50%) translateY(-4px)}
+.table-stage .seat .portrait {
+  width:100%; aspect-ratio:2/3; flex:none; mask-image:none;
+  filter:drop-shadow(0 3px 2px #17191518);
+}
+.table-stage .seat .portrait-unknown,
+.table-stage .seat .portrait-parsifal {background-position:center; background-size:contain; aspect-ratio:1/1.22}
+.table-stage .chair {
+  left:14%; top:22%; width:72%; height:51%; border-radius:45% 45% 5px 5px;
+  transform:none; background:#c74836; opacity:.8;
+  box-shadow:inset 0 0 0 4px #f0ebe033,inset 0 0 0 5px #17191533;
+}
+.table-stage .seat .name-tag {
+  position:relative; left:auto; top:auto; bottom:auto; transform:none;
+  margin:-7px auto 0; max-width:115%; min-width:84%; padding:5px 8px;
+  font-size:clamp(14px,1.5vw,19px); line-height:1.1; z-index:1;
+  box-shadow:0 2px 0 #1719151a;
+}
+.table-stage .seat .seat-tag {
+  position:relative; left:auto; top:auto; transform:none;
+  margin:5px auto 0; font-size:8px; line-height:1.3; letter-spacing:.6px;
+  max-width:125%; white-space:normal;
+}
+.table-stage .seat .seat-tag:empty {display:none}
+.table-stage .empty-seat .chair {opacity:.16}
+.table-stage .empty-seat .name-tag {font-size:11px}
+.table-stage .selected .chair {opacity:1; box-shadow:0 0 0 3px var(--red),0 0 0 6px var(--paper)}
+.table-stage .table-center {gap:8px; padding:0 22%}
+.table-stage .table-center strong {font-size:clamp(42px,5vw,66px)}
+.table-stage .table-center small {max-width:100%}
+.table-stage .table-engraving {letter-spacing:3px}
+@media(max-width:700px) {
+  .table-stage,.table-stage.exhibition {height:540px; margin:24px auto 28px}
+  .table-stage .seat,.table-stage:not(.exhibition) .seat {--seat-width:25%; max-width:122px}
+  .table-stage .seat-0,.table-stage .seat-6 {--x:22%!important}
+  .table-stage .seat-2,.table-stage .seat-4 {--x:78%!important}
+  .table-stage .seat-3 {--x:86%!important}
+  .table-stage .seat-7 {--x:14%!important}
+  .table-stage .oval-table {left:8%; width:84%; top:28%; height:45%}
+  .table-stage .seat .name-tag {font-size:14px; padding:5px 4px; max-width:108%}
+  .table-stage .seat .seat-tag {font-size:7px; padding:4px; letter-spacing:.3px}
+  .table-stage .empty-seat .name-tag {font-size:10px}
+  .table-stage .table-center {padding:0 29%; gap:7px}
+  .table-stage .table-center .eyebrow {font-size:7px; letter-spacing:.7px}
+  .table-stage .table-center small {font-size:8px; line-height:1.5}
+  .table-stage .table-engraving {font-size:6px; letter-spacing:1px}
+  .table-stage .star {font-size:44px}
+}
+@media(max-width:400px) {
+  .table-stage,.table-stage.exhibition {height:475px}
+  .table-stage .seat .name-tag {font-size:12px}
+  .table-stage .empty-seat .name-tag {font-size:9px}
+  .table-stage .table-center strong {font-size:38px}
+}

@@ -1,0 +1,14 @@
+services:
+  avalon:
+    build: .
+    init: true
+    ports:
+      - "8788:8788"
+    environment:
+      AVALON_PUBLIC_ORIGINS: ${AVALON_PUBLIC_ORIGINS:-http://localhost:8788}
+    volumes:
+      - avalon-data:/data
+    restart: unless-stopped
+
+volumes:
+  avalon-data:
